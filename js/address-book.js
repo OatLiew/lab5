@@ -48,6 +48,7 @@ function render(entries){
     var tem= $('.template');
     var addr= $('.address-book');
     var instance;
+    addr.hide();
     addr.empty();
 
     $.each(entries, function(){
@@ -62,8 +63,8 @@ function render(entries){
         });
 
         instance.removeClass('template');
-        //alert(instance);
         addr.append(instance);
+        addr.fadeIn("slow");
     });
 }
 
