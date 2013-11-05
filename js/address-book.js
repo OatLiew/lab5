@@ -1,7 +1,16 @@
-/* address-book.js
-    this is where you will add your JavaScript to complete Lab 5
-*/
 
+$(function(){
+    //alert("sdad");
+    sortObjArray(Employees.entries, 'last');
+    render(Employees.entries);
+});
+
+$('.sort-ui .btn').click(function(){
+        var sortBtn = $(this);
+        var type = sortBtn.attr('data-sortby');
+        sortObjArray(Employees.entries, type);
+        render(Employees.entries);
+});
 
 /* sortObjArray()
     sorts an array of objects by a given property name
@@ -33,4 +42,28 @@ function sortObjArray(objArray, propName) {
             return 1;
     });
 } //sortObjArray()
+
+function render(entries){
+
+    var tem= $('.template');
+    var addr= $('.address-book');
+    var instance;
+    addr.empty();
+
+    $.each(entries, function(){
+        instance = tem.clone();
+        instance.find('.first').html(this.first);
+        instance.find('.last').html(this.last);
+        instance.find('.title').html(this.title);
+        instance.find('.dept').html(this.dept);
+        instance.find('.pic').attr({
+            src: this.pic,
+            alt: 'Picture of ' + this.first
+        });
+
+        instance.removeClass('template');
+        //alert(instance);
+        addr.append(instance);
+    });
+}
 
